@@ -1,3 +1,4 @@
+#include<math.h>
 #ifndef BLOQUE_H
 #define BLOQUE_H
 typedef unsigned long u32
