@@ -6,7 +6,7 @@ using namespace std;
 class Bloque{
     public:
         Bloque();
-        Bloque(u32, int, int);
+        Bloque(int, int);
         virtual ~Bloque();
 
     protected:

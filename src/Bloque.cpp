@@ -7,8 +7,8 @@ Bloque::Bloque(){
     this->taglen = 0;
     this->valid = 0;
 }
-Bloque::Bloque(u32 direccion, int tamano, int setammount){
-    this->address = direccion;
+Bloque::Bloque(int tamano, int setammount){
+    this->address = 0;
     this->blocksize = tamano;
     this->blockoffsetlen = getoffset(tamano);
     this->indexlen = getoffset(setammount);
