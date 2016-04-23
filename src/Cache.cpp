@@ -15,6 +15,9 @@ Cache::Cache(int set, int blocks, int blocksizes){
 	vector< vector<Bloque> > precache (blockamm, setdir);
 	this->cache = precache;
 }
+Cache::~Cache(){
+	
+}
 
 
 
