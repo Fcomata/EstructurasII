@@ -25,6 +25,13 @@ void Bloque::settag(u32 tag){
 u32 Bloque::gettag(void){
 	return this->tag;
 }
+bool Bloque::getvalid(void){
+	return this->valid;
+}
+void Bloque::setvalid(bool valid){
+	this->valid = valid;
+}
+
 Bloque::~Bloque()
 {
     //dtor

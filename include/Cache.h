@@ -8,6 +8,9 @@ class Cache{
 		Cache(int, int, int);
 		virtual ~Cache();
 		void settag(int, int, u32);
+		u32 gettag(int, int);
+		void setvalid(int, int, bool);
+		bool getvalid(int, int);
 	protected:
 		
 	private:

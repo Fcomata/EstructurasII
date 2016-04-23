@@ -10,6 +10,8 @@ class Bloque{
         virtual ~Bloque();
 	void settag(u32);
 	u32 gettag(void);
+	bool getvalid(void);
+	void setvalid(bool);
     protected:
 
     private:

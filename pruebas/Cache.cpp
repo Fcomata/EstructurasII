@@ -26,6 +26,14 @@ u32 Cache::gettag(int set, int assoc){
 	return this->cache[set][assoc].gettag();	
 }
 
+void Cache::setvalid(int set, int assoc, bool valid){
+	this->cache[set][assoc].setvalid(valid);
+}
+bool Cache::getvalid(int set, int assoc){
+	return this->cache[set][assoc].getvalid();
+}
+
+
 
 
 

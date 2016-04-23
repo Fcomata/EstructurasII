@@ -21,6 +21,17 @@ int Bloque::getoffset(int value){
 void Bloque::settag(u32 tag){
 	this->tag = tag;
 }
+
+u32 Bloque::gettag(void){
+	return this->tag;
+}
+bool Bloque::getvalid(void){
+	return this->valid;
+}
+void Bloque::setvalid(bool valid){
+	this->valid = valid;
+}
+
 Bloque::~Bloque()
 {
     //dtor
