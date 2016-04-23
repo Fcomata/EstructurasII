@@ -7,7 +7,7 @@
 #include <sstream>
 #include <bitset>
 #include <climits>
-
+#include <math.h>
 
 using namespace std;
 
@@ -114,16 +114,23 @@ void Get_Data(string line, int length_INDEX, int length_OFFSET){
 
 int main()
 {
-	//Block_size; 8B, 16B, 32B, 64B
-	//N_way; 1, 2, 4
-	//Cache_size; 8KB, 16KB, 32KB, 64KB
-	
+
+	int HIT;
+	int MISS;
+	double MISS_RATE;
 
 	//cache[N_way][Cache_size][Block_size]
-	//Index_block = log2(Cache_size/ (Block_size * N_way)) 
-	//Index_aso = N_way-1; //vectores empiezan en 0
-	//Offset_size = log2(Block_size)
+	int Block_size = 32; 		//8B, 16B, 32B, 64B
+	int N_way = 4; 			//1, 2, 4
+	int Cache_size = 8*1024; 	//8KB, 16KB, 32KB, 64KB
+	bool flag=0;
 
+	int Bits_block = ceil(log2(Cache_size/ (Block_size * N_way)));
+	int Bits_offset = ceil(log2(Block_size));
+	int Index_block = pow(2,ceil(log2(Cache_size/ (Block_size * N_way))));
+
+	//new Cache (Index_block, N_way) --> Cantidad de sets, # de bloque por set
+	
 
     	ifstream myfile;
     	string line; //linea leida
@@ -131,15 +138,55 @@ int main()
 	string s = ""; 
         myfile.open("./../aligned.trace");
         
-	//for(cada linea!)
-        getline (myfile, line);
-	Get_Data(line, 10, 4); //linea, Index_block, tamaño offset
+	//for(cada linea!){
+		getline (myfile, line);
+		flag=0;
+		Get_Data(line, Bits_block, Bits_offset); //linea, #bits bloque, #bits offset
 	
-    	cout << "newline_TAG: " << newline_TAG <<endl;
-	cout << "newline_INDEX: " << newline_INDEX <<endl;
+	    	cout << "newline_TAG: " << newline_TAG <<endl;
+		cout << "newline_INDEX: " << newline_INDEX <<endl;
+
+		/*
+
+		for(n=0; n < N_way; n++){ //recorre la asociatividad
+			if(Cache[newline_Index][n].tag == newline_TAG){ //Busca a ver si hay un TAG igual
+				HIT++;
+			} 
+			else{
+				MISS++; 
+			
+				//Politica de Reemplazo
+
+				for(n=0; n < N_way; n++){
+					if(Cache[newline_Index][n].bit_valid == 0){
+						if(flag==0){ //just modified one
+							Cache[newline_Index][n].tag = newline_TAG; //set tag
+							Cache[newline_Index][n].bit_valid = 1; //set bit
+							flag=1;
+						}
+
+					}
+				}
+
+				if(flag==0){ //if all valid, random replace
+					int rand = rand() % (N_way-1); //da algun valor aleatorio entre los bloques
+					Cache[newline_Index][rand].tag = newline_TAG;
+				}
+
+			}
+
+		}
 
 
-	
+		}//end for(cada linea!)
+
+
+	MISS_RATE = MISS /(MISS+HIT);
+
+
+
+
+	*/
 
 
     return 0;
