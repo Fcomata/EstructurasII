@@ -1,9 +1,9 @@
 #include<math.h>
 #ifndef BLOQUE_H
 #define BLOQUE_H
-typedef unsigned long u32
-class Bloque
-{
+typedef unsigned long u32;
+using namespace std;
+class Bloque{
     public:
         Bloque();
         Bloque(u32, int, int);

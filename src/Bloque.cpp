@@ -1,11 +1,18 @@
 #include "Bloque.h"
-
-Bloque::Bloque(u32 direccion, int tamaño, int setammount){
+Bloque::Bloque(){
+    this->address = 0;
+    this->blocksize = 0;
+    this->blockoffsetlen = 0;
+    this->indexlen = 0;
+    this->taglen = 0;
+    this->valid = 0;
+}
+Bloque::Bloque(u32 direccion, int tamano, int setammount){
     this->address = direccion;
-    this->blocksize = tamaño;
-    this->blockoffset = getoffset(tamaño);
+    this->blocksize = tamano;
+    this->blockoffsetlen = getoffset(tamano);
     this->indexlen = getoffset(setammount);
-    this->taglen = 32 - this->blockoffset -this->indexlen;
+    this->taglen = 32 - this->blockoffsetlen -this->indexlen;
     this->valid = 1;
 }
 int Bloque::getoffset(int value){
