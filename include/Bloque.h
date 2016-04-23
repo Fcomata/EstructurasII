@@ -14,10 +14,10 @@ class Bloque{
     private:
         int blocksize;
         bool valid;
-        int taglen;
-        int indexlen;
-        int blockoffsetlen;
-        u32 address;
+	int setamm;
+        u32 tag;
+        u32 index;
+        u32 offset;
         int getoffset(int);
 
 };
