@@ -18,6 +18,9 @@ Cache::Cache(int set, int blocks, int blocksizes){
 Cache::~Cache(){
 	
 }
+void Cache::settag(int set, int assoc, u32 tag){
+	this->cache[set][assoc].settag(tag);
+}
 
 
 

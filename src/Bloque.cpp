@@ -18,6 +18,9 @@ Bloque::Bloque(int tamano, int setammount){
 int Bloque::getoffset(int value){
     return log2(value);
 }
+void Bloque::settag(u32 tag){
+	this->tag = tag;
+}
 Bloque::~Bloque()
 {
     //dtor

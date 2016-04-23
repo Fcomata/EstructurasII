@@ -7,6 +7,7 @@ class Cache{
 		Cache();
 		Cache(int, int, int);
 		virtual ~Cache();
+		void settag(int, int, u32);
 	protected:
 		
 	private:

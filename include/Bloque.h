@@ -8,6 +8,7 @@ class Bloque{
         Bloque();
         Bloque(int, int);
         virtual ~Bloque();
+	void settag(u32);
 
     protected:
 
