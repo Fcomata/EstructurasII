@@ -114,21 +114,32 @@ void Get_Data(string line, int length_INDEX, int length_OFFSET){
 
 int main()
 {
+	//Block_size; 8B, 16B, 32B, 64B
+	//N_way; 1, 2, 4
+	//Cache_size; 8KB, 16KB, 32KB, 64KB
+	
+
+	//cache[N_way][Cache_size][Block_size]
+	//Index_block = log2(Cache_size/ (Block_size * N_way)) 
+	//Index_aso = N_way-1; //vectores empiezan en 0
+	//Offset_size = log2(Block_size)
+
+
     	ifstream myfile;
-    	string line; //linea leida}
+    	string line; //linea leida
 
 	string s = ""; 
         myfile.open("./../aligned.trace");
         
 	//for(cada linea!)
         getline (myfile, line);
-	Get_Data(line, 10, 4); //linea, tamaño index, tamaño offset
+	Get_Data(line, 10, 4); //linea, Index_block, tamaño offset
 	
     	cout << "newline_TAG: " << newline_TAG <<endl;
 	cout << "newline_INDEX: " << newline_INDEX <<endl;
 
-	
 
+	
 
 
     return 0;
