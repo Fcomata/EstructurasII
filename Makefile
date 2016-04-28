@@ -12,6 +12,7 @@ OBJS = $(patsubst %,$(ODIR)/%,$(_OBJS))
 
 
 $(ODIR)/%.o : $(SDIR)/%.cpp
+	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(INC) -o $@ $< $
 
 $(TARGET): $(OBJS) main.cpp
