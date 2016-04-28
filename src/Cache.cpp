@@ -1,9 +1,12 @@
 #include "Cache.h"
+#include <iostream>
+#include <bitset>
+using namespace std;
 Cache::Cache(){
 	this->blockamm =0;
 	this->sets =0;
 	this->blocksize =0;
-	vector<Bloque> setdir (this->sets, Bloque(this->blocksize,this->sets));
+	vector<Bloque> setdir (this->sets, Bloque(this->blocksize));
 	vector< vector<Bloque> > precache (blockamm, setdir);
 	this->cache = precache;
 	this->blockquant =0;
@@ -16,12 +19,12 @@ Cache::Cache(int set, int blocks, int blocksizes){
 	this->blockamm = blocks;
 	this->sets = set;
 	this->blocksize = blocksizes;
-	vector<Bloque> setdir (this->sets, Bloque(this->blocksize,this->sets));
-	vector< vector<Bloque> > precache (blockamm, setdir);
+	vector<Bloque> setdir (this->blockamm, Bloque(this->blocksize));
+	vector< vector<Bloque> > precache (this->sets, setdir);
 	this->cache = precache;
-	this->blockquant = log2(blockamm);
-	this->indexquant = log2(sets);
-	this->tagquant = 32 -blockquant - indexquant;
+	this->blockquant = ceil(log2(this->blocksize));
+	this->indexquant = ceil(log2(this->sets));
+	this->tagquant = 32 -this->blockquant - this->indexquant;
 	this->hits =0;
 	this->misses =0;
 	
@@ -79,7 +82,7 @@ int Cache::getassoc(int index){
 				
 	}
 	if(j==0){// todos son validos
-		randint = rand()%sets; //randomreplace en sets;
+		randint = rand()%this->blockamm; //randomreplace en bloques!
 		return randint;
 	}
 	else{

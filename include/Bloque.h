@@ -6,7 +6,9 @@ using namespace std;
 class Bloque{
     public:
         Bloque();
-        Bloque(int, int);
+        Bloque(int);
+	Bloque(const Bloque&);
+	Bloque &operator=(const Bloque&);
         virtual ~Bloque();
 	void settag(u32);
 	u32 gettag(void);
@@ -17,7 +19,6 @@ class Bloque{
     private:
         int blocksize;
         bool valid;
-	int setamm;
         u32 tag;
         u32 index;
         u32 offset;
