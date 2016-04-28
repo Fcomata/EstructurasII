@@ -7,6 +7,8 @@ class Bloque{
     public:
         Bloque();
         Bloque(int, int);
+	Bloque(const Bloque&);
+	Bloque &operator=(const Bloque&);
         virtual ~Bloque();
 	void settag(u32);
 	u32 gettag(void);

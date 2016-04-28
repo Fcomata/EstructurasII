@@ -1,4 +1,7 @@
 #include "Cache.h"
+#include <iostream>
+#include <bitset>
+using namespace std;
 Cache::Cache(){
 	this->blockamm =0;
 	this->sets =0;
@@ -15,13 +18,15 @@ Cache::Cache(){
 Cache::Cache(int set, int blocks, int blocksizes){
 	this->blockamm = blocks;
 	this->sets = set;
+	//cout << "sets: " << this->sets <<endl;
 	this->blocksize = blocksizes;
-	vector<Bloque> setdir (this->sets, Bloque(this->blocksize,this->sets));
-	vector< vector<Bloque> > precache (blockamm, setdir);
+	vector<Bloque> setdir (this->blockamm, Bloque(this->blocksize,this->sets));
+	vector< vector<Bloque> > precache (this->sets, setdir);
 	this->cache = precache;
-	this->blockquant = log2(blockamm);
+	this->blockquant = log2(this->blocksize);
 	this->indexquant = log2(sets);
 	this->tagquant = 32 -blockquant - indexquant;
+	//cout<<this->tagquant<<endl;
 	this->hits =0;
 	this->misses =0;
 	
@@ -30,22 +35,35 @@ Cache::~Cache(){
 	
 }
 void Cache::settag(u32 memaddress){
+	//cout<<bitset<32>(memaddress)<<endl;
 	bool miss = 1;
 	u32 tag,index,temp;
 	int set,assoc;
+	//cout<<"1"<<endl;
 	temp = blockquant+indexquant;
+	//cout<<"2"<<endl;
  	tag = memaddress >> temp;
+	//cout<<bitset<32>(tag)<<endl;
+	//cout<<"3"<<endl;
 	temp = tag << temp;
+	//cout<<"4"<<endl;
 	temp = memaddress - temp;
+	//cout<<"5"<<endl;
 	index = temp >> blockquant;
+	//cout<<"6"<<endl;
 	set = (int) index;
+	//cout<< set<<endl;
+	//cout<<"7"<<endl;
 	for(int i = 0; i<this->blockamm;i++){
+		//cout<<"for"<<endl;
 		if(tag == this->gettag(set,i) && this->getvalid(set,i)){
+		//	cout<<"entro"<<endl;
 			miss = 0;
 			this->hits++;
 			break;
 		}
 	}
+//	cout<<"salidelfor"<<endl;
 	if(miss){
 		assoc = this->getassoc(set);
 		this->cache[set][assoc].settag(tag);

@@ -33,6 +33,7 @@ int main(){
 	cache.settag(1231231);
 	cout<<"Misses: "<<cache.getmisses()<<endl;
 	cout<<"Hits: "<<cache.gethits()<<endl;
+	cout<<"hex to int :"<< 0xBF<<endl;
 	return 0;
 	
 }
