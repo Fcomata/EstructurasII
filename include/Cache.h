@@ -3,6 +3,7 @@
 #include <math.h>
 #include <time.h>
 #include <stdio.h>
+#include <stdlib.h>
 #ifndef CACHE_H
 #define CACHE_H
 class Cache{
@@ -12,12 +13,15 @@ class Cache{
 		virtual ~Cache();
 		void settag(u32);
 		u32 gettag(int, int);
-		void setvalid(int, int, bool);
-		bool getvalid(int, int);
-		int getassoc(int);
+		u32 gettag(u32);
+		int getmisses();
+		int gethits();
 	protected:
 		
 	private:
+		int getassoc(int);
+		void setvalid(int, int, bool);
+		bool getvalid(int, int);
 		int blockquant;
 		int indexquant;
 		int tagquant;

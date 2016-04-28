@@ -6,9 +6,11 @@ Cache::Cache(){
 	vector<Bloque> setdir (this->sets, Bloque(this->blocksize,this->sets));
 	vector< vector<Bloque> > precache (blockamm, setdir);
 	this->cache = precache;
-	this->blockoffsetquant =0;
+	this->blockquant =0;
 	this->tagquant =0;
 	this->indexquant =0;
+	this->hits =0;
+	this->misses =0;
 }
 Cache::Cache(int set, int blocks, int blocksizes){
 	this->blockamm = blocks;
@@ -20,6 +22,8 @@ Cache::Cache(int set, int blocks, int blocksizes){
 	this->blockquant = log2(blockamm);
 	this->indexquant = log2(sets);
 	this->tagquant = 32 -blockquant - indexquant;
+	this->hits =0;
+	this->misses =0;
 	
 }
 Cache::~Cache(){
@@ -32,11 +36,11 @@ void Cache::settag(u32 memaddress){
 	temp = blockquant+indexquant;
  	tag = memaddress >> temp;
 	temp = tag << temp;
-	temp = memadress - temp;
+	temp = memaddress - temp;
 	index = temp >> blockquant;
 	set = (int) index;
 	for(int i = 0; i<this->blockamm;i++){
-		if(tag == this->gettag(set,i)&& this->getvalid(set,i){
+		if(tag == this->gettag(set,i) && this->getvalid(set,i)){
 			miss = 0;
 			this->hits++;
 			break;
@@ -65,7 +69,7 @@ int Cache::getassoc(int index){
 	int notvalid[this->blockamm];
 	int j =0;
 	srand (time(NULL));
-	for(int i =0, i<this->blockamm, i++){
+	for(int i =0; i < this->blockamm; i++){
 				
 
 		if(!this->getvalid(index,i)){ //Si es un bit invalido			
@@ -77,10 +81,17 @@ int Cache::getassoc(int index){
 	if(j==0){// todos son validos
 		randint = rand()%sets; //randomreplace en sets;
 		return randint;
+	}
 	else{
 		randint = rand()%j;//randomreplace con j
 		return notvalid[randint];
 	}		
+}
+int Cache::getmisses(){
+	return this->misses;	
+}
+int Cache::gethits(){
+	return this->hits;
 }
 
 

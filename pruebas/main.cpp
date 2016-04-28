@@ -14,11 +14,25 @@ using namespace std;
 
 int main(){
 	Cache cache(3,8,3);
-	cache.settag(2,1,2);
-	cout<<"TAG:"<<cache.gettag(2,1)<<endl;
-	cout<<"Valid:"<<cache.getvalid(2,1)<<endl;
-	cache.setvalid(2,1,1);
-	cout<<"Valid:"<<cache.getvalid(2,1)<<endl;
+	cout<<"Aun no se lee/escribe nada, solo se inicializo el cache"<<endl;
+	cout<<"Misses: "<<cache.getmisses()<<endl;
+	cout<<"Hits: "<<cache.gethits()<<endl;
+	cout<<"Se le lee/escribe una direccion de memoria de 4294967"<<endl;
+	cache.settag(4294967);
+	cout<<"Misses: "<<cache.getmisses()<<endl;
+	cout<<"Hits: "<<cache.gethits()<<endl;
+	cout<<"Se lee/escribe una direccion de memoria de 4294967(de nuevo)"<<endl;
+	cache.settag(4294967);
+	cout<<"Misses: "<<cache.getmisses()<<endl;
+	cout<<"Hits: "<<cache.gethits()<<endl;
+	cout<<"Se lee/escribe una direccion de memoria de 4294966"<<endl;
+	cache.settag(4294966);
+	cout<<"Misses: "<<cache.getmisses()<<endl;
+	cout<<"Hits: "<<cache.gethits()<<endl;
+	cout<<"Se lee/escribe una direccion de memoria de 1231231"<<endl;
+	cache.settag(1231231);
+	cout<<"Misses: "<<cache.getmisses()<<endl;
+	cout<<"Hits: "<<cache.gethits()<<endl;
 	return 0;
 	
 }
