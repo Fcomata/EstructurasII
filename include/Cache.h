@@ -37,7 +37,8 @@ class Cache{
 		Cache();
 		//! Método Constructor preferido.
 		/*! Contruye un cache con set cantidad de sets, blocks cantidad de
-		*	bloques y blocksizes cantidad de direcciones por bloque.
+		*	bloques y blocksizes cantidad de direcciones por bloque. Que son
+		*	los parámetros en ese orden.
 		*/
 		Cache(int, int, int);
 		//! Método Destructor.
