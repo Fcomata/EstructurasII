@@ -70,13 +70,13 @@ class Bloque{
     private:
 	//! Variable privada int blocksize.
 	//! Almacena la cantidad de direcciones de memoria que se utilizan en el cache.
-    int blocksize;
+    	int blocksize;
 	//! Variable privada bool valid.
 	//! Almacena el valor lógico del "Valid Bit".
-    bool valid;
+    	bool valid;
 	//! Variable privada u32 tag.
 	//! Almacena el tag. Se utiliza un u32 para evitar problemas de conversión a otro tipo de dato.
-    u32 tag;
+    	u32 tag;
 
 };
 
